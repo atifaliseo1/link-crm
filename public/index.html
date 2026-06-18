@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Lead Hunter AI - SaaS Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+  <div class="app-container">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="logo-text">LeadHunter <span class="logo-badge">AI</span></span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-view="dashboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item" data-view="results">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Lead Results
+        </a>
+        <a href="#" class="nav-item" data-view="emails">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Generator
+        </a>
+        <a href="#" class="nav-item" data-view="settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          Settings
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <span class="status-indicator online"></span>
+          <span class="status-label">LLM Fallback Engine Active</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN BODY -->
+    <main class="main-content">
+      
+      <!-- TOP HEADER -->
+      <header class="header">
+        <div class="header-title">
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="header-actions">
+          <button id="quick-clear-btn" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            Clear Data
+          </button>
+        </div>
+      </header>
+
+      <!-- PANES -->
+      <div class="content-body">
+        
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="dashboard-view" class="view-pane active">
+          <!-- STAT CARDS -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+              <div class="stat-data">
+                <h3 id="stat-leads-found">0</h3>
+                <p>Leads Scanned</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon verified">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="stat-data">
+                <h3 id="stat-leads-verified">0</h3>
+                <p>Verified Leads (>60)</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon score">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="stat-data">
+                <h3 id="stat-avg-score">0</h3>
+                <p>Avg Lead Score</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon cities">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="stat-data">
+                <h3 id="stat-cities-count">0</h3>
+                <p>Cities Exported</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- DUAL ROW -->
+          <div class="dashboard-grid">
+            <!-- LEAD SEARCH PANEL -->
+            <div class="card search-panel">
+              <div class="card-header">
+                <h2>Find New Leads</h2>
+                <p>Enter local criteria to run Agent Pipeline</p>
+              </div>
+              <form id="search-leads-form" class="search-form">
+                <div class="form-row">
+                  <div class="form-group col-full">
+                    <label for="city-input">Cities (one per line, supports up to 100)</label>
+                    <textarea id="city-input" placeholder="Dallas&#10;Austin&#10;Houston" rows="4" required></textarea>
+                    <span class="help-text">Enter multiple cities for bulk lead collection.</span>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="country-input">Country</label>
+                    <input type="text" id="country-input" value="USA" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="category-input">Business Category</label>
+                    <input type="text" id="category-input" placeholder="e.g. Roofing Companies" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="limit-input">Leads Needed Per City</label>
+                    <select id="limit-input">
+                      <option value="5" selected>5 Leads</option>
+                      <option value="10">10 Leads</option>
+                      <option value="15">15 Leads</option>
+                      <option value="25">25 Leads</option>
+                    </select>
+                  </div>
+                  <div class="form-group align-end">
+                    <button type="submit" id="start-search-btn" class="btn btn-primary btn-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      Start Lead Hunter
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- RUNNING PIPELINE / STATUS -->
+            <div id="job-status-card" class="card job-status-card hidden">
+              <div class="card-header">
+                <div class="job-header-row">
+                  <h2>Active Hunter Agent</h2>
+                  <span class="job-badge pulse" id="job-status-label">RUNNING</span>
+                </div>
+                <p id="job-id-display">Job ID: -</p>
+              </div>
+              <div class="job-body">
+                <div class="progress-container">
+                  <div class="progress-bar">
+                    <div class="progress-fill" id="job-progress-fill" style="width: 0%;"></div>
+                  </div>
+                  <span class="progress-text" id="job-progress-text">0%</span>
+                </div>
+                
+                <div class="pipeline-flow">
+                  <div class="pipeline-step active" id="step-finder">
+                    <div class="step-num">1</div>
+                    <div class="step-details">
+                      <h4>Lead Finder</h4>
+                      <p>Agent 1</p>
+                    </div>
+                  </div>
+                  <div class="pipeline-step" id="step-verifier">
+                    <div class="step-num">2</div>
+                    <div class="step-details">
+                      <h4>Verifier</h4>
+                      <p>Agent 2</p>
+                    </div>
+                  </div>
+                  <div class="pipeline-step" id="step-analyzer">
+                    <div class="step-num">3</div>
+                    <div class="step-details">
+                      <h4>Review Analyzer</h4>
+                      <p>Agent 3</p>
+                    </div>
+                  </div>
+                  <div class="pipeline-step" id="step-writer">
+                    <div class="step-num">4</div>
+                    <div class="step-details">
+                      <h4>Email Writer</h4>
+                      <p>Agent 4</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="job-console">
+                  <div class="console-header">Agent Logs</div>
+                  <div class="console-lines" id="job-console-logs">
+                    <p class="console-line info">Waiting for parameters...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- WELCOME/TIPS CARD -->
+            <div id="quick-tips-card" class="card quick-tips-card">
+              <div class="card-header">
+                <h2>Agent Workflow Overview</h2>
+                <p>How Lead Hunter AI works</p>
+              </div>
+              <div class="card-body">
+                <div class="tip-item">
+                  <div class="tip-icon">OSM</div>
+                  <div class="tip-content">
+                    <h4>Agent 1 - Finder</h4>
+                    <p>Scrapes Google Maps via Playwright or pulls from OpenStreetMap API to fetch local businesses.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <div class="tip-icon verified-tip">✓</div>
+                  <div class="tip-content">
+                    <h4>Agent 2 - Verifier</h4>
+                    <p>Checks website code (200 OK, HTTPS), matches phone number formats, filters out score &le; 60 leads.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <div class="tip-icon analyzer-tip">⚙</div>
+                  <div class="tip-content">
+                    <h4>Agent 3 - Analyzer</h4>
+                    <p>Scrapes/analyzes reviews using LLM to spot company weaknesses, complaints, and SEO flaws.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <div class="tip-icon writer-tip">✉</div>
+                  <div class="tip-content">
+                    <h4>Agent 4 - Writer</h4>
+                    <p>Uses Gemini/OpenRouter to craft unique cold emails targeting those exact review weaknesses.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. LEAD RESULTS VIEW -->
+        <section id="results-view" class="view-pane">
+          <div class="card">
+            <div class="card-table-header">
+              <div class="table-search-row">
+                <input type="text" id="leads-search-input" placeholder="Search leads by name, city, website...">
+                <select id="score-filter-select">
+                  <option value="all">All Scores</option>
+                  <option value="high">High Match (75 - 100)</option>
+                  <option value="mid">Medium Match (50 - 74)</option>
+                  <option value="low">Low Match (0 - 49)</option>
+                </select>
+              </div>
+              <div class="table-actions">
+                <button id="export-csv-btn" class="btn btn-secondary btn-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  Export CSV
+                </button>
+                <button id="export-json-btn" class="btn btn-secondary btn-sm">
+                  Export JSON
+                </button>
+                <button id="export-txt-btn" class="btn btn-secondary btn-sm">
+                  Export TXT
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table id="leads-table">
+                <thead>
+                  <tr>
+                    <th>Business Name</th>
+                    <th>Location</th>
+                    <th>Website</th>
+                    <th>Phone</th>
+                    <th>Rating</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="leads-table-body">
+                  <tr>
+                    <td colspan="8" class="text-center">No leads found in database. Start a search on the Dashboard!</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. EMAIL GENERATOR VIEW -->
+        <section id="emails-view" class="view-pane">
+          <div class="email-workspace">
+            <!-- LEADS SIDE LIST -->
+            <div class="email-leads-list-card">
+              <div class="list-header">
+                <h3>Qualified Leads</h3>
+                <span id="email-leads-count" class="badge">0</span>
+              </div>
+              <div class="list-items" id="email-leads-container">
+                <div class="text-center p-4">No qualified leads.</div>
+              </div>
+            </div>
+
+            <!-- EMAIL EDITOR -->
+            <div class="email-editor-card" id="email-editor-card-empty">
+              <div class="editor-empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <h3>Select a Lead</h3>
+                <p>Choose a lead from the left sidebar to edit and copy their generated outreach email.</p>
+              </div>
+            </div>
+
+            <div class="email-editor-card hidden" id="email-editor-card-active">
+              <div class="editor-header">
+                <div class="editor-lead-info">
+                  <h2 id="editor-lead-name">ABC Roofing</h2>
+                  <div class="lead-meta-row">
+                    <span id="editor-lead-rating" class="badge">Rating: 4.7</span>
+                    <span id="editor-lead-score" class="badge badge-success">Score: 100</span>
+                    <a id="editor-lead-url" href="#" target="_blank" class="lead-link-btn">
+                      Visit Website
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="editor-actions">
+                  <button id="regenerate-email-btn" class="btn btn-secondary btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    Regenerate AI
+                  </button>
+                  <button id="copy-email-btn" class="btn btn-primary btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    Copy Email
+                  </button>
+                </div>
+              </div>
+
+              <div class="editor-weaknesses-section">
+                <strong>Detected Pain Points:</strong>
+                <div id="editor-weaknesses-list" class="tag-list">
+                  <span class="tag">Slow Response</span>
+                </div>
+              </div>
+
+              <div class="editor-inputs">
+                <div class="form-group">
+                  <label for="email-subject-input">Subject Line</label>
+                  <input type="text" id="email-subject-input">
+                </div>
+                <div class="form-group flex-fill">
+                  <label for="email-body-input">Email Body</label>
+                  <textarea id="email-body-input" rows="12"></textarea>
+                </div>
+              </div>
+
+              <div class="editor-footer">
+                <span class="provider-label" id="email-provider-display">AI Provider: Gemini</span>
+                <button id="save-email-changes-btn" class="btn btn-secondary btn-sm">Save Edits</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. SETTINGS VIEW -->
+        <section id="settings-view" class="view-pane">
+          <div class="settings-grid">
+            
+            <!-- API KEYS CARD -->
+            <div class="card">
+              <div class="card-header">
+                <h2>AI Engine Settings</h2>
+                <p>Configure LLM keys for personalization fallback chain</p>
+              </div>
+              <form id="api-settings-form" class="settings-form">
+                <div class="form-group">
+                  <label for="gemini-key-input">Gemini API Key (Primary)</label>
+                  <input type="password" id="gemini-key-input" placeholder="Enter Gemini Free API Key">
+                  <span class="help-text">Obtain from Google AI Studio. Used as the main engine.</span>
+                </div>
+                
+                <div class="form-group">
+                  <label for="openrouter-key-input">OpenRouter API Key (Secondary)</label>
+                  <input type="password" id="openrouter-key-input" placeholder="Enter OpenRouter API Key">
+                  <span class="help-text">Used for DeepSeek Free models if Gemini fails.</span>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ollama-host-input">Ollama Host (Local Fallback)</label>
+                    <input type="text" id="ollama-host-input" value="http://localhost:11434">
+                  </div>
+                  <div class="form-group">
+                    <label for="ollama-model-input">Ollama Model</label>
+                    <input type="text" id="ollama-model-input" value="llama3.2">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save API Keys</button>
+              </form>
+            </div>
+
+            <!-- SCRAPER CONTROLS CARD -->
+            <div class="card">
+              <div class="card-header">
+                <h2>Scraping Configuration</h2>
+                <p>Toggle source options and connection checks</p>
+              </div>
+              <div class="settings-body">
+                <div class="control-row">
+                  <div class="control-label">
+                    <h4>Playwright Google Maps Scraper</h4>
+                    <p>Scrapes direct reviews, website links, and rating details. If disabled, defaults directly to the Nominatim/Overpass OpenStreetMap API.</p>
+                  </div>
+                  <div class="control-toggle">
+                    <label class="switch">
+                      <input type="checkbox" id="toggle-scraper" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <hr class="divider">
+
+                <div class="settings-connection-status">
+                  <h4>Pipeline Connections</h4>
+                  <div class="connection-status-item">
+                    <span>OSM Geocoding API</span>
+                    <span class="badge badge-success">ACTIVE</span>
+                  </div>
+                  <div class="connection-status-item">
+                    <span>Overpass Engine</span>
+                    <span class="badge badge-success">ACTIVE</span>
+                  </div>
+                  <div class="connection-status-item">
+                    <span>Playwright scraper driver</span>
+                    <span class="badge badge-success" id="playwright-status">INSTALLED</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- NOTIFICATION CONTAINER -->
+  <div id="notification-toast" class="toast hidden">
+    <span id="toast-message">Notification details here.</span>
+  </div>
+
+  <!-- LEAD DETAILS MODAL -->
+  <div id="lead-details-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-lead-name">ABC Roofing</h3>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Website:</strong> <a id="modal-lead-web" href="#" target="_blank">-</a></p>
+        <p><strong>Phone:</strong> <span id="modal-lead-phone">-</span></p>
+        <p><strong>Address:</strong> <span id="modal-lead-address">-</span></p>
+        <p><strong>Rating:</strong> <span id="modal-lead-rating">-</span></p>
+        <p><strong>Lead Score:</strong> <span id="modal-lead-score">-</span></p>
+        <div class="modal-weaknesses mt-4">
+          <strong>Identified Weaknesses:</strong>
+          <ul id="modal-weaknesses-list">
+            <li>Slow Response</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
